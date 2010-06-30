@@ -97,7 +97,7 @@ class QueryController < ApplicationController
      
      # set the default title incase there is an error
      @query_title = "TimeDJ.com - Mixing Times Around The World"
-
+     
     #temp = params[:city][:name].strip.downcase.split(/\s*[;+]+\s*/, -1)
     #temp.delete_if {|x| x == ""} # remove blank entries
     temp = []
@@ -263,7 +263,15 @@ class QueryController < ApplicationController
         @max_good_hour = [max_hour, @max_good_hour].min;
       end
       #if @max_good_hour < @min_good_hour then @max_good_hour = 17 end
+
+      # Bit of fixup if FIFA game time specified
+      if (params[:game_time]) then
+        @min_good_hour = params[:game_time].to_f.floor - (@tzdeltas[0]/60).floor
+        @max_good_hour = @min_good_hour + 1
+        @override = params[:game_time].to_f
+      end
       
+
       # create the dynamic title with all the cities names in it
       temp_title = "TimeDJ.com - Time in "  
       @myinputs.each do |i|
