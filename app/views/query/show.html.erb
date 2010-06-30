@@ -181,7 +181,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 	<% game_hour = ((hour % 12) == 0) ? 12 : hour%12 %>
 	<% game_minute = ((minute*60).floor == 0) ? "00" : (minute*60).floor %>
 	<% am_pm = (hour >= 12) ? "pm" : "am"%>
-	<%= "<h3> FIFA World Cup game starts at <span style='color:red'>#{game_hour}:#{game_minute} #{am_pm}</span> in your local time zone. </h3>" %>
+	<%= "<h3> World Cup game starts at <span style='color:red'>#{game_hour}:#{game_minute} #{am_pm}</span> in your local time zone. </h3>" %>
 	<% end %>
     <div class="Muffin">
         <table id="timetable" align="center">
