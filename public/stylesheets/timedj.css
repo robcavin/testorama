@@ -132,3 +132,10 @@ div.CalendarPane h4 {
 div.AdBox {
 	
 }
+
+div.left {
+	float:left;
+}
+div.right {
+	text-align:center;
+}
