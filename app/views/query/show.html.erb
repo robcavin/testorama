@@ -1,0 +1,254 @@
+<style type="text/css">@import "/stylesheets/jquery.datepick.css";</style> 
+<style type="text/css">@import "/stylesheets/jquery.icalendar.css";</style> 
+
+<script src="/javascripts/jquery.dimensions.pack.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.tooltip.pack.js" type="text/javascript"></script>
+<script type="text/javascript" src="/javascripts/jquery.tablehover.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.icalendar.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.datepick.min.js"></script>                 
+<script type="text/javascript">
+$(document).ready(function() 
+{ 
+//$('#child *').tooltip();
+//$("#timetable").tableHover({});
+//$('#child *').click(function(event){
+	
+/*alert("Feature coming soon...");*/
+//})
+}); 	
+</script>
+<script type="text/javascript">
+ 	
+    function setDateFromDialog(date, time){
+		if (time) document.getElementById('meetingTime').value = time;
+		if (date) document.getElementById('meetingDate').value = date
+		
+		var starthour = document.getElementById('meetingTime').value;
+        var duration = (document.getElementById('meetingDuration').value * 60) / 2;
+				
+        mystarthour = (starthour) ? starthour : 12;
+        myduration = (duration) ? duration : 90;
+
+	    var startdate = document.getElementById('meetingDate').value;    
+        var StartDate = (startdate) ? new Date(startdate) : new Date();
+        var EndDate = new Date(StartDate);
+        
+        StartDate.setHours(mystarthour)
+        EndDate.setHours(StartDate.getHours() + myduration / 60)
+        EndDate.setMinutes(StartDate.getMinutes() + myduration % 60)
+        //console.log(EndDate)        
+        
+        var TimeDJEvent = {
+            start: StartDate,
+            end: EndDate,
+            title: 'Your Meeting',
+            description: '~This multiple time zone meeting was scheduled via TimeDJ.com~',
+            location: ''
+        };
+        
+        $('#basicICal').icalendar($.extend({
+            icons: '/images/icalendar.png',
+			compact: true,
+            sites: ['yahoo', 'google', 'outlook'],
+            echoUrl: "/query/ical_show"
+        }, TimeDJEvent))
+        $('#basicICal').icalendar('change', TimeDJEvent);
+    }
+
+    $(function(){
+        $('#meetingDate').datepick({
+            onClose: function(date){setDateFromDialog(date)}
+        })
+    });
+
+	$(document).ready(function() {
+		setDateFromDialog();
+	});
+	
+    function startTime(id, offset){
+        var temp_today = new Date().getTime();
+		temp_today = temp_today + (offset*60000);
+		today = new Date(temp_today);
+        var h = today.getHours(); 
+        var m = today.getMinutes(); 
+        var s = today.getSeconds();
+		var am_pm = "am"
+        // add a zero in front of numbers<10
+        m = checkTime(m);
+        s = checkTime(s);
+		if (h > 11) {if (h > 12) h = (h-12); am_pm = "pm";}
+		if (h == 0) h = 12;
+        document.getElementById(id).innerHTML = h + ":" + m + ":" + s + " " + am_pm;
+		t = setTimeout('startTime("'+id+'",'+offset+')', 500);
+    }
+    
+    function checkTime(i){
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+	
+</script>
+
+<%= "<script>" %>
+<%= "  $(function(){" %>
+<% (0..23).each do |i| %>
+<%="$('\#time_cell#{i}').datepick({onClose: function(date){ setDateFromDialog(date, #{i})} })" %>
+<%end %>
+<%="    });"%>
+<%= "</script>" %>
+			
+
+<div class="ColContainer">
+
+<div class="LtCol">
+<div class="AdBox">
+<div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr" style="padding-left:6%">
+		Sponsored by <br><br>
+<script type="text/javascript"><!--
+google_ad_client = "pub-7857017723872880";
+/* 160x600, created 4/25/10 */
+google_ad_slot = "8117300726";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<!--
+        <SCRIPT type="text/javascript" LANGUAGE="javascript" src="http://www.qksz.net/1e-ilcy"> </SCRIPT> <br><br>
+        <SCRIPT type="text/javascript" LANGUAGE="javascript" src="http://www.qksz.net/1e-im71"> </SCRIPT> <br><br>
+        <SCRIPT type="text/javascript" LANGUAGE="javascript" src="http://www.qksz.net/1e-im73"> </SCRIPT> <br><br>
+-->
+</div></div></div></div></div></div></div></div> 
+</div>
+</div>	
+
+<div class="RtCol">
+    <div class="CalendarPane" style="text-align:left">
+        <!--Meeting time: <input class="Body" type="text" readonly=1 id="meetingTime" size=6 value=""></input><br>-->
+		<div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr">
+		<div style="height:300px">
+		<h4>Add to Calendar</h4>
+		Select the local time that works best for all meeting particpants from the chart or enter the information below.
+		<h4>Meeting Details</h4>
+	    <div class="pane" style="text-align:right">
+        Time: 
+        <select id="meetingTime" onChange='setDateFromDialog()'>
+            <% (0..23).each do |i| %><%= "<option value=#{i} #{(i==8) ? "selected=1" : ""}>#{(i%12 == 0) ? 12 : i%12} #{(i >= 12) ? 'pm' : 'am'}</option>" %><%end %>
+        </select><br>
+
+		Duration:
+        <select id="meetingDuration" onChange='setDateFromDialog()'>
+            <% (1..9).each do |i| %><%= "<option value=#{i} #{(i==2) ? "selected=1" : ""}>#{i*0.5} hr</option>" %><%end%>
+        </select><br>
+
+        Date: <input class="Body" type="text" readonly=1 id="meetingDate" size=8 value="<%="#{Date.today.mon}/#{Date.today.day}/#{Date.today.year}"%>">
+        </input>
+		<span style="text-align:left"><h4>Select Your Calendar</h4></span>
+		<div class="ICalWrapper" style="text-align:center; margin-left:auto; margin-right:45px;">
+          <div id="basicICal" align='right' style="text-align:right">
+		</div>
+        </div>
+		<br>
+	    </div>
+		</div>
+		<br>
+		</div></div></div></div></div></div></div></div> <!-- This closes the box around the time/date/duration -->
+		<br>
+		<div class="t"><div class="b"><div class="l"><div class="r"><div class="bl"><div class="br"><div class="tl"><div class="tr">
+	   		<h4>Web Search</h4>
+			<form action="http://www.google.com/cse" id="cse-search-box" target="_blank">
+			  <div>
+			    <input type="hidden" name="cx" value="partner-pub-7857017723872880:njltho27wr5" />
+			    <input type="hidden" name="ie" value="ISO-8859-1" />
+			    <input type="text" name="q" size="16" />
+			    <input type="submit" name="sa" value="Search" />
+			  </div>
+			</form>
+			<script type="text/javascript" src="http://www.google.com/cse/brand?form=cse-search-box&amp;lang=en"></script>
+		</div></div></div></div></div></div></div></div> <!-- This closes the box around the time/date/duration -->
+	</div>
+</div>
+
+<div class="CtrCol" id="CtrCol" style="margin-top:10px;">
+	
+    <div class="Muffin">
+        <table id="timetable" align="center">
+	    <thead>		
+	    <tr>
+	    <% if @needs_local_col then%>
+	        	<%= "<th> Local Time<BR>" %>
+	        	<%= "(#{@local_tz_name})</th>" %> 
+		<%end%>     
+		<%@myinputs.each do |i| %>
+	        	<%= "<th> #{i.utf8_name},<BR>"%>
+	        	<%= "#{i.country.name}<BR>" %>
+	        	<%= "(#{i.time_zone.name})</th>" %> 
+		<%end%>     
+	    </tr>
+	    </thead>
+	    <tbody>
+	    	<tr><%="<th colspan=100% class=parent id=test> Current time </th> " %> </tr> 
+
+	    	<tr>
+			<% first_city = @needs_local_col ? 0 : 1 %>
+			<% if  @needs_local_col then %>
+	    		<%= "<td id='cur_time_loc' style='font-weight:bold; color:black; padding-top:3px; padding-bottom:3px;'><script type='text/javascript'> startTime('cur_time_loc', 0) </script></td>" %>
+			<%end%>			
+			<%(first_city..(@myinputs.length-1)).each do |j|%>
+	    		<%= "<td id='cur_time_#{j}' style='font-weight:bold; color:black; padding-top:3px; padding-bottom:3px;'><script type='text/javascript'> startTime('cur_time_#{j}', #{@tzdeltas[j]} ) </script></td>" %>
+			<%end%>
+			</tr>
+
+		<%(0 .. 23).each do |i| %>
+			<%  if i== 0 then
+				@tr_id = "Early_Morning"
+				 elsif (i== 18) 
+				@tr_id = "Late_Evening"
+	 			elsif (i== 8) 
+				@tr_id = "Work_Day"
+				else
+				@tr_id=""
+				end %>
+			
+			<%= if (@tr_id !="") 
+				line = "<th colspan=100% class=parent id=#{@tr_id} "
+				line += "style='font-weight: bold' " if (@tr_id == "Work_Day") 
+				line += "> #{@tr_id=~ %r{(.*)_(.*)}; $1+" "+$2} </th>"
+				line 
+			end%>
+			<% am_pm = i < 12 ? "am" : "pm" %>
+			<%= if i==23 then "<tfoot>" end%>			
+			<%= "<tr id=child#{i} >" %>
+			
+			<%= "<td id='time_cell#{i}' title=\"Click to set meeting time and date\" class=\"#{(i <8|| i>17) ? "dim_time" : ((i < @min_good_hour || i > @max_good_hour) ? "dim_awake_time" : "awake_time")}\"> #{(i%12 != 0) ? i%12 : 12}:00 #{am_pm}</td>"%>
+			
+			<% first_city = @needs_local_col ? 0 : 1 %>
+			<%(first_city..(@myinputs.length-1)).each do |j|%>
+				<% tz_delta_h = i + (@tzdeltas[j] / 60).floor%>
+				<% tz_delta_m = (@tzdeltas[j]%60 == 0) ? "00" : @tzdeltas[j]%60%>
+				<% am_pm = tz_delta_h%24 < 12 ? "am" : "pm" %>
+				<%= "<td class=\"#{(tz_delta_h%24 <8 || tz_delta_h%24>17) ? "dim_time" : ((i < @min_good_hour || i > @max_good_hour) ? "dim_awake_time" : "awake_time")}\">#{(tz_delta_h%12 != 0) ? tz_delta_h%12 : 12}:#{tz_delta_m} #{am_pm}"%>
+				<%= "-" if (tz_delta_h < 0) %>
+				<%= "+" if (tz_delta_h >= 24) %>
+				<%= "</td>" %>
+			<%end%>
+			<%= "</tr>" %>
+			<%= if i==23 then "</tfoot>" end%>
+		<%end%>
+		
+	   </tbody>
+       </table>
+	   <br>
+	   <div class="legend">
+			+ Time is one day <b>ahead</b> of your local time.<br>
+			- Time is one day <b>behind</b> your local time.
+	   </div>
+       </div>
+       <!-- closing Muffin-->
+</div>
+
+</div>

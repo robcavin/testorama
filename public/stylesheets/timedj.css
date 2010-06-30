@@ -1,0 +1,134 @@
+/* Default Style Sheet for TimeDJ */
+
+html, body {
+ text-align: center;
+ font-size:14.5px;
+ font: 100% helvetica,sans-serif;
+ margin:0;
+ padding:0; 
+ border:0;
+} 
+
+div.Menu {
+ text-align: left;
+ position:relative;
+ font: 13px helvetica,sans-serif;
+ margin: 8px 8px 0px 8px;
+}
+
+div.Title {
+ text-align: center;
+ font-size:50px;
+ font-variant:small-caps;
+ position:relative;
+ top:3px;
+}
+
+div.ColContainer {
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 300px;
+	max-width: 1024px;
+	min-width: 800px;
+}
+
+div.LtCol,
+div.RtCol,
+div.CtrCol {
+	font: 14.5px helvetica,sans-serif;
+	color:#333333;
+}
+
+div.LtCol {
+  float: left;
+  padding: 0px 10px 0px 4px;
+  width: 186px;
+}
+
+div.CtrCol {
+  top: 10px;
+  text-align: center;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+div.RtCol {
+  float: right;
+  padding: 0px 4px 0px 10px;
+  width: 186px;
+}
+
+div.Footer {
+  bottom: 0%;
+  width: 100%;
+  margin-top: 30px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  text-align: center;
+  clear: both;
+  font: small/1.1 helvetica,sans-serif;
+  background: white;
+}
+div.Footer .line {
+	background: transparent url(../images/footer_line.png) repeat-x;
+	height: 25px;
+	margin: 0;
+	padding: 0;
+}
+div.Footer .copyright {
+	color:#333333;
+}
+
+div.InfoImage {
+	margin: 10px, 10px, 10px, 10px;
+	float: left;
+}
+ 
+hr 
+{
+	margin-left: 50;
+	margin-right: 50;    
+	width: 90%;
+}
+
+div.externals{
+	position:relative; left:25%; top:60px; width: 50%; height:140px; 
+}
+      
+/*
+h3 {
+ text-align: center;
+ font: bold 84% 'trebuchet ms',helvetica,sans-serif; 
+ position:relative;
+ top:0px;
+}
+*/
+
+input.djinput{
+	background: blue;
+}
+
+div.InfoBox {
+	border: none;
+	color:#333333;
+	line-height:1.25em;
+	text-align: left;
+}
+.t {background: url(/images/tn.png) 0 0 repeat-x; width: 100%; margin-left:auto; margin-right:auto;}
+.b {background: url(/images/ts.png) 0 100% repeat-x}
+.l {background: url(/images/tw.png) 0 0 repeat-y}
+.r {background: url(/images/te.png) 100% 0 repeat-y}
+.bl {background: url(/images/tbl_w.png) 0 100% no-repeat}
+.br {background: url(/images/tbr_w.png) 100% 100% no-repeat}
+.tl {background: url(/images/tpl_w.png) 0 0 no-repeat}
+.tr {background: url(/images/tpr_w.png) 100% 0 no-repeat; padding:10px; padding-left: 9%; padding-right: 6%} 
+
+div.CalendarPane h4 {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-right: 0px;
+}
+
+div.AdBox {
+	
+}

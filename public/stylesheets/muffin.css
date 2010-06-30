@@ -1,0 +1,116 @@
+/* 
+	Grey Suits you Sir. Please host the images on your own server.
+	written by Stuart Colville http://www.muffinresearch.co.uk
+*/
+
+div.Muffin table,
+div.Muffin td
+{
+	border                :none;
+	/*border             : 1px solid #CCC;*/
+	border-collapse      : collapse;
+  	/*font                 : small/1.1 "Tahoma", "Bitstream Vera Sans", Verdana, Helvetica, sans-serif;*/
+	font                 : small/1.1 Helvetica, sans-serif;
+	text-align	     	 : center;
+}
+div.Muffin table
+{
+ 	border                :none;
+	border                :1px solid #CCC;
+}
+div.Muffin thead th,
+div.Muffin tbody th,
+div.Muffin tfoot th
+{
+	border                : 0px solid #CCC;
+	background            : #FFF ;	color                 : #666;  
+	padding               : 3px 5px;
+	border-left           : 1px solid #CCC;
+	border-right           : 1px solid #CCC;
+	min-width 	      	  : 100px;
+}
+
+div.Muffin tfoot tr,
+div.Muffin tfoot td	
+{
+	padding               : 1px 1px;
+  	color                 : #666;
+	border                :none;	
+}
+
+
+div.Muffin tbody th
+{
+  border                : 1px solid #ccc; 
+  background            : #f1f1f2; /*#fafafb;*/
+  /*border-top          : 1px solid #CCC;*/
+  text-align            : left;
+  font-weight			: 100;
+  color					: black;
+  /*padding				: 2px 2px;*/
+}
+div.Muffin tbody tr, 
+div.Muffin tbody td
+{
+	padding               : 1px 1px;
+  	color                 : #666;
+	border                :none;
+	border-right 			: 1px solid #CCC;
+  	border-left 			: 1px solid #CCC;
+}
+
+div.Muffin tbody tr:hover td, 
+div.Muffin tfoot tr:hover td
+{
+  color                 : black; /*#454545;*/
+  background            : #f48338 /*orange;*/
+}
+
+div.Muffin caption
+{
+	text-align            : left;
+	font-size             : 120%;
+	padding               : 10px 0;
+	color                 : #666;
+}
+div.Muffin table a:link
+{
+	color                 : #666;
+}
+div.Muffin table a:visited
+{
+	color                 : #666;
+}
+div.Muffin table a:active
+{
+	color                 : #003366;
+}
+
+div.Muffin td.awake_time {
+	border: 1px;
+ 	border-right-style: solid;
+ 	border-right-color: #CCC;
+	background:lightgreen;
+	color: black;
+	font-weight:bold;
+}
+
+div.Muffin td.dim_awake_time {
+	border: 1px;
+ 	border-right-style: solid;
+ 	border-right-color: #CCC;
+	background:#D0FFD0;
+}
+
+div.Muffin td.dim_time {
+	 border: 1px;
+	 border-right-style: solid;
+	 border-right-color: #CCC;
+	 /*background:;*/
+}
+
+div.Muffin .legend {
+	color                 : #666;
+	font                 : small/1.1 Helvetica, sans-serif;
+}
+
