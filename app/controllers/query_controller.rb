@@ -142,8 +142,8 @@ class QueryController < ApplicationController
             # we need to do something if the params are bad
         end
         lookup_params[:name] = city.strip.squeeze(' ')
-        lookup_params[:region_id] = Region.find(:first, :conditions => {:name => region.strip.squeeze(' ')}) if region        
         lookup_params[:country_id] = Country.find(:first, :conditions => {:name => country.gsub(/\(.*/,"").strip.squeeze(' ')}) if country
+        lookup_params[:region_id] = Region.find(:first, :conditions => {:name => region.strip.squeeze(' '), :country_code => lookup_params[:country_id].country_code}) if (region and country)        
         city = City.find(:first, :conditions => lookup_params, :order => ordering)
 
         # Try one more time assuming only city and region
