@@ -264,7 +264,7 @@ class QueryController < ApplicationController
       end
       #if @max_good_hour < @min_good_hour then @max_good_hour = 17 end
 
-      # Bit of fixup if FIFA game time specified
+      # Bit of fixup if world cup game time specified
       if (params[:game_time]) then
         @min_good_hour = params[:game_time].to_f.floor - (@tzdeltas[0]/60).floor
         @max_good_hour = @min_good_hour + 1
